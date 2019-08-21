@@ -1,0 +1,18 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: true
+  tasks:
+  - name: install the latest version of Apache
+    yum:
+      name: httpd
+      state: latest
+  - name: Statrt service httpd, if not started
+    service:
+      name: httpd
+      state: started
+  - name: Create an index.html page
+    copy:
+      content: "Created by Jagan using Ansible \n After fixing passwordless authentication \n\n"
+      dest: /var/www/html/index.html
+
